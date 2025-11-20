@@ -1,0 +1,60 @@
+/* CSS */
+.header-logo {
+    height: 60px; /* Sets the height to 60 pixels */
+    width: auto; /* Ensures the width scales proportionally */
+    margin-top: 5px; /* Adds a small gap above the logo */
+  }
+/* General body styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* light background for contrast */
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c3e50; /* dark blue-gray */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* subtle shadow */
+}
+
+/* Logo styling */
+.navbar .logo img {
+    height: 50px;
+}
+
+/* Navigation links container */
+.nav-links {
+    list-style: none; /* remove bullets */
+    display: flex;    /* horizontal layout */
+    margin: 0;
+    padding: 0;
+}
+
+/* Individual links spacing */
+.nav-links li {
+    margin-left: 20px;
+}
+
+/* Links text styling */
+.nav-links a {
+    text-decoration: none; /* remove underline */
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s; /* smooth hover effect */
+}
+
+/* Hover effect for links */
+.nav-links a:hover {
+    color: #1abc9c; /* bright greenish accent */
+}
+
+/* Optional: make navbar sticky at the top */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
