@@ -1,60 +1,202 @@
-/* CSS */
-.header-logo {
-    height: 60px; /* Sets the height to 60 pixels */
-    width: auto; /* Ensures the width scales proportionally */
-    margin-top: 5px; /* Adds a small gap above the logo */
-  }
-/* General body styling */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* light background for contrast */
-}
-
-/* Navbar container */
+/* NAVBAR STYLING */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2c3e50; /* dark blue-gray */
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* subtle shadow */
+    padding: 20px 40px;
+    height: 140px; /* taller for bigger links and animation */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    /* Background image */
+    background-image: url('image/d.jpeg');
+    background-size: 1200px 600px;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* Logo styling */
-.navbar .logo img {
-    height: 50px;
+/* Overlay for cinematic effect */
+.navbar::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 0;
 }
 
-/* Navigation links container */
+/* Brand Name styling */
+.brand-name {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Nav links */
 .nav-links {
-    list-style: none; /* remove bullets */
-    display: flex;    /* horizontal layout */
+    list-style: none;
+    display: flex;
+    gap: 40px;  /* more space for bigger links */
     margin: 0;
     padding: 0;
 }
 
-/* Individual links spacing */
-.nav-links li {
-    margin-left: 20px;
-}
-
-/* Links text styling */
 .nav-links a {
-    text-decoration: none; /* remove underline */
     color: white;
-    font-weight: bold;
-    transition: color 0.3s; /* smooth hover effect */
+    text-decoration: none;
+    font-size: 20px;    /* bigger links */
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover effect for links */
-.nav-links a:hover {
-    color: #1abc9c; /* bright greenish accent */
+    .nav-links a:hover {
+    color: #ff0000;    /* red text on hover */
+    transform: translateY(-5px) scale(5); /* lift + slight expansion */
+
+
 }
 
-/* Optional: make navbar sticky at the top */
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* ===============================
+   KATANA SLICE HOVER EFFECT (WHITE)
+   =============================== */
+/* Nav links */
+.nav-links li {
+    position: relative;
+    overflow: visible; /* let the katana go outside the link */
+}
+
+/* Katana chop effect */
+.nav-links li::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;                     /* start from center of link */
+    width: 200px;                   /* adjust size of katana */
+    height: 90px;                   /* adjust thickness */
+    background-image: url('image/katanas.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%) rotate(-20deg) scale(0); /* hidden and rotated */
+    opacity: 0;
+    pointer-events: none;            /* doesn't block link hover */
+    z-index: 2;
+    animation: none;
+}
+
+/* Trigger animation on hover */
+.nav-links li:hover::after {
+    animation: katana-chop 0.5s forwards; /* play chop animation */
+}
+
+/* Keyframes for chop effect */
+@keyframes katana-chop {
+    0% {
+        transform: translate(-50%, -50%) rotate(-20deg) scale(0);
+        opacity: 0;
+    }
+    30% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1.2); /* swing forward */
+        opacity: 1;
+    }
+    60% {
+        transform: translate(-50%, -50%) rotate(10deg) scale(1); /* settle */
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(20deg) scale(0.8); /* fade out */
+        opacity: 0;
+    }
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0; /* vertical spacing */
+}
+
+.image-container {
+  position: relative;
+  max-width: 800px; /* a bit smaller for half-body */
+  width: 90%;
+}
+
+.image-container img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  object-fit: cover; /* keeps proportions neat if cropping occurs */
+}
+
+.intro {
+  position: absolute;
+  top: 15%;   /* near head */
+  right: 5%;
+  color: white;
+  background-color: rgba(0,0,0,0.4); /* subtle overlay */
+  padding: 15px 20px;
+  border-radius: 8px;
+}
+
+.note {
+  position: absolute;
+  top: 45%;   /* adjusted lower for half-body */
+  left: 5%;
+  color: white;
+  background-color: rgba(0,0,0,0.3);
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-style: italic;
+}
+.about {
+  padding: 50px 10%;
+  font-family: 'Poppins', sans-serif;
+}
+
+.about h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #222;
+}
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap; /* stacks on small screens */
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.about-text .fun-facts {
+  margin-top: 20px;
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
 }
