@@ -1,22 +1,36 @@
-/* NAVBAR STYLING */
+/* =======================
+   NAVBAR
+======================= */
 .navbar {
+    background-color: #888888; /* medium cool gray */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    height: 140px; /* taller for bigger links and animation */
+    height: 140px;
     position: sticky;
     top: 0;
     z-index: 100;
-
-    /* Background image */
-    background-image: url('image/d.jpeg');
-    background-size: 1200px 600px;
-    background-position: center;
-    background-repeat: no-repeat;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: slideDownFade 0.8s ease-out forwards;
 }
 
-/* Overlay for cinematic effect */
+@keyframes slideDownFade {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.navbar img.sword {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; /* adjust as needed */
+    z-index: 1;
+    opacity: 0.3; /* faint texture like in your description */
+}
+
+
 .navbar::before {
     content: "";
     position: absolute;
@@ -26,7 +40,6 @@
     z-index: 0;
 }
 
-/* Brand Name styling */
 .brand-name {
     color: white;
     font-size: 28px;
@@ -36,167 +49,204 @@
     z-index: 1;
 }
 
-/* Nav links */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 40px;  /* more space for bigger links */
+    gap: 40px;
     margin: 0;
     padding: 0;
+}
+
+.nav-links li {
+    position: relative;
+    overflow: visible; /* allows katana to go outside */
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 20px;    /* bigger links */
+    font-size: 20px;
     font-weight: 600;
     position: relative;
     z-index: 1;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
-    .nav-links a:hover {
-    color: #ff0000;    /* red text on hover */
-    transform: translateY(-5px) scale(5); /* lift + slight expansion */
-
-
+.nav-links a:hover {
+    color: #ff0000;
+    transform: translateY(-5px) scale(1.05); /* slight expansion */
 }
 
-/* ===============================
-   KATANA SLICE HOVER EFFECT (WHITE)
-   =============================== */
-/* Nav links */
-.nav-links li {
-    position: relative;
-    overflow: visible; /* let the katana go outside the link */
-}
-
-/* Katana chop effect */
+/* Katana hover effect */
 .nav-links li::after {
     content: "";
     position: absolute;
     top: 50%;
-    left: 50%;                     /* start from center of link */
-    width: 200px;                   /* adjust size of katana */
-    height: 90px;                   /* adjust thickness */
+    left: 50%;
+    width: 200px;
+    height: 90px;
     background-image: url('image/katanas.jpeg');
     background-size: contain;
     background-repeat: no-repeat;
-    transform: translate(-50%, -50%) rotate(-20deg) scale(0); /* hidden and rotated */
+    transform: translate(-50%, -50%) rotate(-20deg) scale(0);
     opacity: 0;
-    pointer-events: none;            /* doesn't block link hover */
+    pointer-events: none;
     z-index: 2;
-    animation: none;
 }
 
-/* Trigger animation on hover */
 .nav-links li:hover::after {
-    animation: katana-chop 0.5s forwards; /* play chop animation */
+    animation: katana-chop 0.5s forwards;
 }
 
-/* Keyframes for chop effect */
 @keyframes katana-chop {
-    0% {
-        transform: translate(-50%, -50%) rotate(-20deg) scale(0);
-        opacity: 0;
-    }
-    30% {
-        transform: translate(-50%, -50%) rotate(0deg) scale(1.2); /* swing forward */
-        opacity: 1;
-    }
-    60% {
-        transform: translate(-50%, -50%) rotate(10deg) scale(1); /* settle */
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(20deg) scale(0.8); /* fade out */
-        opacity: 0;
-    }
+    0% { transform: translate(-50%, -50%) rotate(-20deg) scale(0); opacity: 0; }
+    30% { transform: translate(-50%, -50%) rotate(0deg) scale(1.2); opacity: 1; }
+    60% { transform: translate(-50%, -50%) rotate(10deg) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) rotate(20deg) scale(0.8); opacity: 0; }
 }
 
+
+/* =======================
+   HERO SECTION
+======================= */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 80px 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.my-img {
+    width: 350px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.intro, .note {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(0,0,0,0.35);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(3px);
+    color: white;
+    position: relative;
+    z-index: 2;
+    opacity: 0; /* start hidden for animation */
+}
+
+/* Slide-in animations */
+.slide-in-left { animation: slideInLeft 1s ease-out forwards; }
+.slide-in-right { animation: slideInRight 1s ease-out forwards; }
+.slide-in-up { animation: slideInUp 1.2s ease-out forwards; }
+
+/* Slide-out animations */
+.slide-out-left { animation: slideOutLeft 0.8s ease-in forwards; }
+.slide-out-right { animation: slideOutRight 0.8s ease-in forwards; }
+.slide-out-down { animation: slideOutDown 0.8s ease-in forwards; }
+
+/* Keyframes */
+@keyframes slideInLeft { from { opacity:0; transform:translateX(-80px); } to { opacity:1; transform:translateX(0); } }
+@keyframes slideInRight { from { opacity:0; transform:translateX(80px); } to { opacity:1; transform:translateX(0); } }
+@keyframes slideInUp { from { opacity:0; transform:translateY(80px); } to { opacity:1; transform:translateY(0); } }
+
+@keyframes slideOutLeft { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(-80px); } }
+@keyframes slideOutRight { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(80px); } }
+@keyframes slideOutDown { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(80px); } }
+
+
+/* =======================
+   HOME PAGE IMAGE CONTAINER
+======================= */
 .home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 0; /* vertical spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
 }
 
 .image-container {
-  position: relative;
-  max-width: 800px; /* a bit smaller for half-body */
-  width: 90%;
+    position: relative;
+    max-width: 800px;
+    width: 90%;
 }
 
 .image-container img {
-  width: 100%;
-  display: block;
-  border-radius: 10px;
-  object-fit: cover; /* keeps proportions neat if cropping occurs */
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
+/* Intro and note overlays */
 .intro {
-  position: absolute;
-  top: 15%;   /* near head */
-  right: 5%;
-  color: white;
-  background-color: rgba(0,0,0,0.4); /* subtle overlay */
-  padding: 15px 20px;
-  border-radius: 8px;
+    position: absolute;
+    top: 15%; /* near head */
+    right: 5%;
 }
 
 .note {
-  position: absolute;
-  top: 45%;   /* adjusted lower for half-body */
-  left: 5%;
-  color: white;
-  background-color: rgba(0,0,0,0.3);
-  padding: 10px 15px;
-  border-radius: 8px;
-  font-style: italic;
+    position: absolute;
+    top: 45%; /* near heart */
+    left: 5%;
+    font-style: italic;
 }
+
+
+/* =======================
+   ABOUT SECTION
+======================= */
 .about {
-  padding: 50px 10%;
-  font-family: 'Poppins', sans-serif;
+    padding: 50px 10%;
+    font-family: 'Poppins', sans-serif;
 }
 
 .about h1 {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 36px;
-  font-weight: bold;
-  color: #222;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #222;
 }
 
 .about-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  flex-wrap: wrap; /* stacks on small screens */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .about-text {
-  flex: 1;
-  min-width: 300px;
-  font-size: 18px;
-  line-height: 1.6;
-  color: #333;
+    flex: 1;
+    min-width: 300px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
 }
 
 .about-text .fun-facts {
-  margin-top: 20px;
-  list-style: disc;
-  padding-left: 20px;
+    margin-top: 20px;
+    list-style: disc;
+    padding-left: 20px;
 }
 
 .about-image {
-  flex: 1;
-  min-width: 250px;
-  text-align: center;
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
 }
 
 .about-image img {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 10px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
 }
